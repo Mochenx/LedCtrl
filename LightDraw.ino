@@ -187,6 +187,6 @@ int f_hold_breath(pRGB * cmd_queue) {
         (*cmd_queue+i)->B = 255-i*16;
         (*cmd_queue+i)->repeat = 10;
     }
-    return 1;
+    return 16;
 }
 //////////////////////////////////////////////////////////////////////////
