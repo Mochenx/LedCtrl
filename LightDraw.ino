@@ -104,7 +104,7 @@ void init_patns() {
 	//////////////////////////////////////////////////////////////////////////
 	//From sequence To patterns
     //Initialize pattern objects
-    new_patn(&all_patns[0],&f_hold_white);
+    new_patn(&all_patns[0],&f_hold_breath);
     new_patn(&all_patns[1],&f_hold_red);
     new_patn(&all_patns[2],&f_hold_green);
     new_patn(&all_patns[3],&f_hold_blue);
@@ -135,9 +135,9 @@ unsigned char get_dip() {
 //Color Pattern Function Defines
 int f_hold_white(pRGB * cmd_queue) {
     (*cmd_queue) = (pRGB)malloc(sizeof(RGB));
-    (*cmd_queue)->R = 255;
-    (*cmd_queue)->G = 255;
-    (*cmd_queue)->B = 255;
+    (*cmd_queue)->R = 8;
+    (*cmd_queue)->G = 8;
+    (*cmd_queue)->B = 8;
 	(*cmd_queue)->repeat = 255;
     return 1;
 }
@@ -175,6 +175,18 @@ int f_hold_yellow(pRGB * cmd_queue) {
     (*cmd_queue)->G = 255;
     (*cmd_queue)->B = 255;
 	(*cmd_queue)->repeat = 255;
+    return 1;
+}
+
+int f_hold_breath(pRGB * cmd_queue) {
+    int i;
+    (*cmd_queue) = (pRGB)malloc(sizeof(RGB)*16);
+    for(i = 0;i < 16;i ++) {
+        (*cmd_queue+i)->R = 0;
+        (*cmd_queue+i)->G = 0;
+        (*cmd_queue+i)->B = 255-i*16;
+        (*cmd_queue+i)->repeat = 10;
+    }
     return 1;
 }
 //////////////////////////////////////////////////////////////////////////
