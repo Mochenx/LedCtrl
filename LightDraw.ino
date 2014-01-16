@@ -8,10 +8,10 @@
 #define LED1_G_PIN 15
 #define LED1_B_PIN 14
 
-#define DIP_PIN_3 0
-#define DIP_PIN_2 0
-#define DIP_PIN_1 0
-#define DIP_PIN_0 0
+#define DIP_PIN_3 4
+#define DIP_PIN_2 5
+#define DIP_PIN_1 6
+#define DIP_PIN_0 7
 
 //Interrupt pin
 #define STOP_PIN 2
@@ -45,10 +45,12 @@ void setup()   {
 
 	//Input Pins
     //pinMode(STOP_PIN, INPUT);
-    //pinMode(DIP_PIN_3, INPUT);
-    //pinMode(DIP_PIN_2, INPUT);
-    //pinMode(DIP_PIN_1, INPUT);
-    //pinMode(DIP_PIN_0, INPUT);
+    pinMode(6,OUTPUT);//For Debug
+    digitalWrite(6,1);//For Debug
+    pinMode(DIP_PIN_3, INPUT);
+    pinMode(DIP_PIN_2, INPUT);
+    pinMode(DIP_PIN_1, INPUT);
+    pinMode(DIP_PIN_0, INPUT);
 
     //attachInterrupt(STOP_PIN,stop,CHANGE);
 }
@@ -104,7 +106,7 @@ void init_patns() {
 	//////////////////////////////////////////////////////////////////////////
 	//From sequence To patterns
     //Initialize pattern objects
-    new_patn(&all_patns[0],&f_hold_breath);
+    new_patn(&all_patns[0],&f_hold_white);
     new_patn(&all_patns[1],&f_hold_red);
     new_patn(&all_patns[2],&f_hold_green);
     new_patn(&all_patns[3],&f_hold_blue);
@@ -135,28 +137,28 @@ unsigned char get_dip() {
 //Color Pattern Function Defines
 int f_hold_white(pRGB * cmd_queue) {
     (*cmd_queue) = (pRGB)malloc(sizeof(RGB));
-    (*cmd_queue)->R = 8;
-    (*cmd_queue)->G = 8;
-    (*cmd_queue)->B = 8;
-	(*cmd_queue)->repeat = 255;
+    (*cmd_queue)->R = 32;
+    (*cmd_queue)->G = 32;
+    (*cmd_queue)->B = 32;
+	(*cmd_queue)->repeat = 32;
     return 1;
 }
 
 int f_hold_red(pRGB * cmd_queue) {
     (*cmd_queue) = (pRGB)malloc(sizeof(RGB));
-    (*cmd_queue)->R = 255;
+    (*cmd_queue)->R = 32;
     (*cmd_queue)->G = 0;
     (*cmd_queue)->B = 0;
-	(*cmd_queue)->repeat = 255;
+	(*cmd_queue)->repeat = 32;
     return 1;
 }
 
 int f_hold_green(pRGB * cmd_queue) {
     (*cmd_queue) = (pRGB)malloc(sizeof(RGB));
     (*cmd_queue)->R = 0;
-    (*cmd_queue)->G = 255;
+    (*cmd_queue)->G = 32;
     (*cmd_queue)->B = 0;
-	(*cmd_queue)->repeat = 255;
+	(*cmd_queue)->repeat = 32;
     return 1;
 }
 
@@ -164,17 +166,17 @@ int f_hold_blue(pRGB * cmd_queue) {
     (*cmd_queue) = (pRGB)malloc(sizeof(RGB));
     (*cmd_queue)->R = 0;
     (*cmd_queue)->G = 0;
-    (*cmd_queue)->B = 255;
-	(*cmd_queue)->repeat = 255;
+    (*cmd_queue)->B = 32;
+	(*cmd_queue)->repeat = 32;
     return 1;
 }
 
 int f_hold_yellow(pRGB * cmd_queue) {
     (*cmd_queue) = (pRGB)malloc(sizeof(RGB));
     (*cmd_queue)->R = 0;
-    (*cmd_queue)->G = 255;
-    (*cmd_queue)->B = 255;
-	(*cmd_queue)->repeat = 255;
+    (*cmd_queue)->G = 32;
+    (*cmd_queue)->B = 32;
+	(*cmd_queue)->repeat = 32;
     return 1;
 }
 
