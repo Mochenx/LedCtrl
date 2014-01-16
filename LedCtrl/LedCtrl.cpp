@@ -5,7 +5,7 @@ void new_patn(ppattern new_patn,init_handler hdl) {
     new_patn->cmd_q_size = (*new_patn->patn_init_hdl)(&new_patn->cmd_queue);//Initiallizing pattern queue
 }
 
-void new_led(pLED new_led,
+void new_led(pLED new_led,pLED * glb_led_array,
             int pin_r,int pin_g,int pin_b,
             ppattern use_patn) {
     int i;
@@ -16,6 +16,7 @@ void new_led(pLED new_led,
     new_led->_step_idx = 0;
     new_led->_repeat_idx = 0;
     new_led->patn = use_patn;
+	*glb_led_array = new_led;
     
 }
 
@@ -27,6 +28,7 @@ pRGB step(pLED led_obj) {
     
     //if(led_obj->_repeat_idx == 0) {
     //}
+	led_obj->_repeat_idx ++;
     if(led_obj->_repeat_idx >= pret_val->repeat) {
         led_obj->_repeat_idx = 0;
         led_obj->_step_idx ++;
@@ -35,4 +37,9 @@ pRGB step(pLED led_obj) {
         led_obj->_step_idx = 0;
     return pret_val;
 }
-    
+
+void reset_led(pLED led_obj) {
+    led_obj->_step_idx = 0;
+    led_obj->_repeat_idx = 0;
+} 
+

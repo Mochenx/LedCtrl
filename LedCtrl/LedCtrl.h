@@ -21,10 +21,11 @@ typedef struct __LED {
     ppattern patn;
 }LED,* pLED;
 
-void new_patn(ppattern new_patn,init_handler hdl);
-void new_led(pLED new_led,
-            int pin_r,int pin_g,int pin_b,
-            ppattern use_patn);
-pRGB step(pLED led_obj);
+void new_patn(ppattern ,init_handler );
+void new_led(pLED ,pLED*,
+            int ,int ,int ,
+            ppattern );
+pRGB step(pLED );
+void reset_led(pLED );
 
 #endif
