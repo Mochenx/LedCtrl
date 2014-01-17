@@ -208,14 +208,14 @@ int f_hold_yellow(pRGB * cmd_queue) {
 
 int f_hold_breath(pRGB * cmd_queue) {
     int i;
-    (*cmd_queue) = (pRGB)malloc(sizeof(RGB)*80);//80 = 32+8+32
+    (*cmd_queue) = (pRGB)malloc(sizeof(RGB)*72);//80 = 32+8+32
     for(i = 0;i < 72;i ++) {
         (*cmd_queue+i)->R = (i<32)?(255-i*8):
                             ((i>40)?(255-31*8+(i-40)*8):
                             (255-31*8));
         (*cmd_queue+i)->G = (*cmd_queue+i)->R;
         (*cmd_queue+i)->B = (*cmd_queue+i)->R; 
-        (*cmd_queue+i)->repeat = 255;
+        (*cmd_queue+i)->repeat = 1;
     }
     return 72;
 }
@@ -228,7 +228,7 @@ int f_hold_color(pRGB * cmd_queue) {
         (*cmd_queue+i)->R = (i == 0)?255:0;
         (*cmd_queue+i)->G = (i == 1)?255:0;
         (*cmd_queue+i)->B = (i == 2)?255:0;
-        (*cmd_queue+i)->repeat = 255;
+        (*cmd_queue+i)->repeat = 10;
     }
     return 3;
 }
